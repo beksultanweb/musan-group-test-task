@@ -1,16 +1,18 @@
 import { Button, Input, Radio, Form } from 'antd'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { IRequest } from '../../types/types';
 
 const FormComp = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [city, setCity] = useState('Астана')
 
     const SubmitForm = (values: IRequest) => {
         const date = new Date().toLocaleDateString("ru-RU")
         dispatch({type: 'request/add', payload: {...values, date}})
+        navigate('/thankyou')
     }
 
     return (
