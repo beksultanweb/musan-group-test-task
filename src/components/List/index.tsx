@@ -37,7 +37,7 @@ const columns: RequestsColumn[] = [
     title: 'Дата добавления',
     dataIndex: 'date',
     key: 'date',
-    sorter: (a: IRequest, b: IRequest) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+    sorter: (a: IRequest, b: IRequest) => a.date.localeCompare(b.date),
   },
 ];
 
