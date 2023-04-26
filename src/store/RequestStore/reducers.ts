@@ -10,11 +10,11 @@ export const requestReducer = (state = initialState, action: IRequestsStoreActio
     case 'request/add':
       const newRequest: IRequest = {
         id: Math.random(),
-        name: action.payload.name,
-        tel: action.payload.tel,
-        email: action.payload.email,
-        city: action.payload.city,
-        date: action.payload.date,
+        name: action.payload?.name,
+        tel: action.payload?.tel,
+        email: action.payload?.email,
+        city: action.payload?.city,
+        date: action.payload?.date,
       };
       return { ...state, requests: [...state.requests, newRequest] };
     default:

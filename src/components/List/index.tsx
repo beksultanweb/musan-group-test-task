@@ -1,17 +1,14 @@
 import { useSelector } from 'react-redux';
 import { Table } from 'antd';
-import { IRequest, Column } from '../../types/types';
+import { IRequest, RequestsColumn } from '../../types/types';
 import { selectRequests } from '../../store/RequestStore/selectors';
 
-const columns: Column[] = [
+const columns: RequestsColumn[] = [
   {
     title: '№',
     dataIndex: 'id',
     key: 'id',
-    render: (id, record, index) => {
-      ++index;
-      return index;
-    },
+    render: (id, record, index) => ++index,
   },
   {
     title: 'Имя',
@@ -28,13 +25,13 @@ const columns: Column[] = [
     title: 'E-mail',
     dataIndex: 'email',
     key: 'email',
-    responsive: ['sm'],
+    responsive: ['lg'],
   },
   {
     title: 'Город',
     dataIndex: 'city',
     key: 'city',
-    responsive: ['sm'],
+    responsive: ['lg'],
   },
   {
     title: 'Дата добавления',
@@ -50,7 +47,7 @@ const List = () => {
   return (
     <div className='sm:px-paddingx'>
       <h1>Все заявки</h1>
-      <Table<IRequest> dataSource={requests} columns={columns} rowKey={'id'} pagination={false} />
+      <Table dataSource={requests} columns={columns} rowKey={'id'} pagination={false} />
     </div>
   );
 };

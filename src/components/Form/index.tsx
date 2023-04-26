@@ -5,8 +5,24 @@ import { useDispatch } from 'react-redux';
 import { IRequest } from '../../types/types';
 import { addRequestAction } from '../../store/RequestStore/actions';
 import './style.scss';
+import * as yup from 'yup';
 
 const cities = ['Астана', 'Алматы'];
+
+let schema = yup.object().shape({
+  name: yup.string().required('Обязательно для заполнения.'),
+  tel: yup
+    .string()
+    .matches(/^\+?77\d{9}$/, 'Номер телефона должен соответсвовать +7 7** *** ****.')
+    .required('Обязательно для заполнения.'),
+  email: yup.string().email('Введите правильный email адрес.').required('Обязательно для заполнения.'),
+});
+
+const yupSync = {
+  async validator(rule: any, value: string): Promise<void> {
+    await schema.validateSyncAt(rule.field, { [rule.field]: value });
+  },
+};
 
 const FormComp = () => {
   const dispatch = useDispatch();
@@ -14,18 +30,12 @@ const FormComp = () => {
   const [form] = Form.useForm();
   const [city, setCity] = useState('Астана');
 
-  function getRandomDate(start: string, end: string): string {
-    const startDate = new Date(start).getTime();
-    const endDate = new Date(end).getTime();
-    const randomTime = startDate + Math.random() * (endDate - startDate);
-    return new Date(randomTime).toLocaleString('ru-RU');
-  }
-
   const SubmitForm = (values: IRequest) => {
-    const randomTime = getRandomDate('2020-01-01', '2022-12-31');
     const uploadObj = {
       ...values,
-      date: randomTime,
+      date: new Date().toLocaleString('ru-RU', {
+        hour12: false,
+      }),
     };
     dispatch(addRequestAction(uploadObj));
     navigate('/thankyou');
@@ -50,30 +60,26 @@ const FormComp = () => {
     <Form form={form} onFinish={SubmitForm}>
       <h1 className='text-5xl text-center font-semibold mt-[90px]'>Оставить заявку</h1>
       <div className='w-width mx-auto mb-[146px]'>
-        <Form.Item name='name' className='mb-4' rules={[{ required: true, message: '' }]}>
+        <Form.Item name='name' className='mb-4' rules={[yupSync]}>
           <Input className='h-height rounded-15 text-18 pl-6' type='text' placeholder='Ваше имя' />
         </Form.Item>
-        <Form.Item
-          className='mb-4'
-          name='tel'
-          rules={[{ required: true, message: '', pattern: new RegExp('^[0-9+]*$') }]}
-        >
+        <Form.Item className='mb-4' name='tel' rules={[yupSync]}>
           <Input
-            maxLength={11}
+            maxLength={12}
             className='h-height rounded-15 text-18 pl-6'
             type='tel'
             onChange={handlePhoneInput}
-            placeholder={'Номер телефона'}
+            placeholder='Номер телефона'
           />
         </Form.Item>
-        <Form.Item name='email' className='mb-4' rules={[{ required: true, message: '', type: 'email' }]}>
+        <Form.Item name='email' className='mb-4' rules={[yupSync]}>
           <Input className='h-height rounded-15 text-18 pl-6' type='email' placeholder='E-mail' />
         </Form.Item>
         <Form.Item className='mb-4' initialValue={city} name='city'>
           <Radio.Group
             className='w-full rounded-15 border-grey-400 border flex'
             value={city}
-            onChange={e => handleCityChange(e)}
+            onChange={handleCityChange}
             optionType='button'
           >
             {cities.map(city => (

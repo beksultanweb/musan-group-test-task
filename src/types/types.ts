@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { Breakpoint } from 'antd';
 
 export interface IRequest {
@@ -10,12 +9,7 @@ export interface IRequest {
   date: string;
 }
 
-export interface RouteElements {
-  path: string;
-  element: FC;
-}
-
-export interface Column {
+export interface RequestsColumn {
   title: string;
   dataIndex: keyof IRequest;
   key: keyof IRequest;

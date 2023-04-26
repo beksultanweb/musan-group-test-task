@@ -1,17 +1,16 @@
-import { Routes, Route } from 'react-router-dom';
-import { routeElements } from './config/routeElements';
+import { useRoutes } from 'react-router-dom';
+
 import Header from './components/Header';
+import { routeElements } from './config/routeElements';
 
 function App() {
+  const routes = useRoutes(routeElements);
+
   return (
-    <main className='container'>
+    <div>
       <Header />
-      <Routes>
-        {routeElements.map(route => (
-          <Route key={route.path} path={route.path} element={<route.element />} />
-        ))}
-      </Routes>
-    </main>
+      {routes}
+    </div>
   );
 }
 

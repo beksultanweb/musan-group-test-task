@@ -1,6 +1,8 @@
-export const addRequestAction = (uploadObj: Object) => {
+import { IRequest } from '../../types/types';
+
+export const addRequestAction = (request: IRequest) => {
   return {
     type: 'request/add',
-    payload: uploadObj,
+    payload: request,
   };
 };

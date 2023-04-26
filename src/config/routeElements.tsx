@@ -1,19 +1,18 @@
 import FormComp from '../components/Form';
 import List from '../components/List';
 import Thankyou from '../components/Thankyou';
-import { RouteElements } from '../types/types';
 
-export const routeElements: RouteElements[] = [
+export const routeElements = [
   {
     path: '/',
-    element: FormComp,
+    element: <FormComp />,
   },
   {
     path: '/list',
-    element: List,
+    element: <List />,
   },
   {
     path: '/thankyou',
-    element: Thankyou,
+    element: <Thankyou />,
   },
 ];
