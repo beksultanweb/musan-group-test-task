@@ -5,11 +5,11 @@ import Header from './components/Header';
 function App() {
   return (
     <main className='container'>
-      <Header/>
+      <Header />
       <Routes>
-      {routeElements.map(route => (
-        <Route key={route.path} path={route.path} element={<route.element/>}/>
-      ))}
+        {routeElements.map(route => (
+          <Route key={route.path} path={route.path} element={<route.element />} />
+        ))}
       </Routes>
     </main>
   );

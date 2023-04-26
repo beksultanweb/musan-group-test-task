@@ -4,42 +4,42 @@ module.exports = {
   theme: {
     extend: {
       spacing: {
-        height: '54px',
-        width: '360px',
-        paddingx: '56px'
+        thankyou: "241px",
+        height: "54px",
+        width: "360px",
+        paddingx: "56px",
       },
       borderRadius: {
-        15: '15px'
+        15: "15px",
       },
       fontSize: {
-        14: '14px',
-        18: '18px'
+        14: "14px",
+        18: "18px",
       },
       colors: {
         grey: {
-          400: '#CACACA'
+          400: "#CACACA",
         },
         blue: {
-          400: '#17ABEB'
+          400: "#17ABEB",
         },
         success: {
-          400: '#5BD222'
+          400: "#5BD222",
         },
         error: {
-          400: '#FF3F25'
+          400: "#FF3F25",
         },
         black: {
-          400: '#000'
+          400: "#000",
         },
         default: {
-          400: '#888888'
-        }
-      }
+          400: "#888888",
+        },
+      },
     },
   },
   plugins: [],
   corePlugins: {
-    preflight: false
-  }
-}
-
+    preflight: false,
+  },
+};

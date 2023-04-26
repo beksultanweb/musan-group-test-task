@@ -3,14 +3,16 @@
 @tailwind utilities;
 
 @layer base {
-    html {
-        font-family: Inter, sans-serif;
-    }
-    *, ::before, ::after {
-        border-width: 0;
-        border-style: solid;
-    }
-    body {
-        margin: 0;
-    }
+  html {
+    font-family: Inter, sans-serif;
+  }
+  *,
+  ::before,
+  ::after {
+    border-width: 0;
+    border-style: solid;
+  }
+  body {
+    margin: 0;
+  }
 }

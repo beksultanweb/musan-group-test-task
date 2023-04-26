@@ -1,14 +1,14 @@
-import { IRequest } from "../../types/types"
+import { IRequest } from '../../types/types';
 
 export interface IRequestsStoreAction {
-    type: string,
-    payload: IRequest
+  type: string;
+  payload: IRequest;
 }
 
 export interface IRequestsReducer {
-    requests: IRequest[]
+  requests: IRequest[];
 }
 
 export interface IStore {
-    requestReducer: IRequestsReducer
+  requestReducer: IRequestsReducer;
 }

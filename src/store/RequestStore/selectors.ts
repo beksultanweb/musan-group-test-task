@@ -1,3 +1,3 @@
-import { IRequestsReducer } from "./types"
+import { IRequestsReducer } from './types';
 
-export const selectRequests = (state: IRequestsReducer) => state.requests
+export const selectRequests = (state: IRequestsReducer) => state.requests;
