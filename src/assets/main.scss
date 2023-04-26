@@ -1,4 +1,4 @@
-@import './variables.module.scss';
+@import './variables.scss';
 
 header {
     a {
@@ -6,19 +6,5 @@ header {
         &.active {
             color: $blue;
         }
-    }
-}
-
-.ant-radio-button-wrapper-checked {
-    border: none;
-    background-color: $light-blue !important;
-    border-radius: 15px;
-    color: $blue !important;
-}
-.ant-radio-button-wrapper {
-    border: none !important;
-    border-radius: 15px !important;
-    &:not(:first-child)::before {
-        display: none;
     }
 }

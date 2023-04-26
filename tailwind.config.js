@@ -3,6 +3,18 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      spacing: {
+        height: '54px',
+        width: '360px',
+        paddingx: '56px'
+      },
+      borderRadius: {
+        15: '15px'
+      },
+      fontSize: {
+        14: '14px',
+        18: '18px'
+      },
       colors: {
         grey: {
           400: '#CACACA'

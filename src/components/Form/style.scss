@@ -1,0 +1,18 @@
+@import '../../assets/variables.scss';
+
+.ant-radio-group {
+    .ant-radio-button-wrapper-checked {
+        border: none;
+        background-color: $light-blue;
+        border-radius: 15px;
+        color: $blue;
+        font-weight: 500;
+    }
+    .ant-radio-button-wrapper {
+        border: none;
+        border-radius: 15px;
+        &:not(:first-child)::before {
+            display: none;
+        }
+    }
+}

@@ -1,4 +1,4 @@
-import { IRequest } from "../types/types"
+import { IRequest } from "../../types/types"
 
 export interface IRequestsStoreAction {
     type: string,

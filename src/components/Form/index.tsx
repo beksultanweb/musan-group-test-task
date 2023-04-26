@@ -1,8 +1,12 @@
-import { Button, Input, Radio, Form } from 'antd'
+import { Button, Input, Radio, Form, RadioChangeEvent } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { IRequest } from '../../types/types';
+import { addRequestAction } from '../../store/RequestStore/actions';
+import './style.scss'
+
+const cities = ['Астана', 'Алматы']
 
 const FormComp = () => {
     const dispatch = useDispatch()
@@ -10,32 +14,42 @@ const FormComp = () => {
     const [city, setCity] = useState('Астана')
 
     const SubmitForm = (values: IRequest) => {
-        const date = new Date().toLocaleDateString("ru-RU")
-        dispatch({type: 'request/add', payload: {...values, date}})
+        const uploadObj = {
+            ...values,
+            date: new Date().toLocaleString('ru-RU', {
+                hour12: false
+            })
+        }
+        dispatch(addRequestAction(uploadObj))
         navigate('/thankyou')
+    }
+
+    const handleCityChange = (event: RadioChangeEvent) => {
+        setCity(event.target.value)
     }
 
     return (
         <Form onFinish={SubmitForm}>
             <h1 className='text-5xl text-center font-semibold mt-[90px]'>Оставить заявку</h1>
-            <div className='w-[360px] mx-auto mb-[146px]'>
+            <div className='w-width mx-auto mb-[146px]'>
                 <Form.Item name="name" className='mb-4' rules={[{required: true, message: ''}]}>
-                    <Input className='h-[54px] rounded-[15px] text-[18px] pl-6' type="text" placeholder='Ваше имя'/>
+                    <Input className='h-height rounded-15 text-18 pl-6' type="text" placeholder='Ваше имя'/>
                 </Form.Item>
-                <Form.Item name="tel" className='mb-4' rules={[{required: true, message: ''}]}>
-                    <Input className='h-[54px] rounded-[15px] text-[18px] pl-6' type="tel" placeholder='Номер телефона'/>
+                <Form.Item className='mb-4' name="tel" rules={[{required: true, message: '', pattern: new RegExp("^[0-9]*$")}]}>
+                    <Input maxLength={11} className='h-height rounded-15 text-18 pl-6' type="tel" placeholder={'Номер телефона'}/>
                 </Form.Item>
-                <Form.Item name="email" className='mb-4' rules={[{required: true, message: ''}]}>
-                    <Input className='h-[54px] rounded-[15px] text-[18px] pl-6' type="email" placeholder='E-mail'/>
+                <Form.Item name="email" className='mb-4' rules={[{required: true, message: '', type: 'email'}]}>
+                    <Input className='h-height rounded-15 text-18 pl-6' type="email" placeholder='E-mail'/>
                 </Form.Item>
-                <Form.Item className='mb-4' initialValue={'Астана'} name="city">
-                    <Radio.Group buttonStyle='solid' className='w-full rounded-[15px] border-grey-400 border flex' value={city} onChange={(event) => setCity(event.target.value)} optionType='button'>
-                        <Radio.Button className='w-2/4 text-default-400 text-[18px] items-center flex justify-center h-[54px]' value='Астана'>Астана</Radio.Button>
-                        <Radio.Button className='w-2/4 text-default-400 text-[18px] items-center flex justify-center h-[54px]' value='Алматы'>Алматы</Radio.Button>
+                <Form.Item className='mb-4' initialValue={city} name="city">
+                    <Radio.Group className='w-full rounded-15 border-grey-400 border flex' value={city} onChange={handleCityChange} optionType='button'>
+                        {cities.map(city => (
+                            <Radio.Button className='w-2/4 text-default-400 text-18 items-center flex justify-center h-height' key={city} value={city}>{city}</Radio.Button>
+                        ))}
                     </Radio.Group>
                 </Form.Item>
-                <Button className='w-full h-[54px] rounded-[15px] text-[18px]' type='primary' htmlType='submit'>Отправить</Button>
-                <p className='text-default-400 text-[14px]'>Нажимая на кнопку, вы соглашаетесь с <Link className='text-blue-400 no-underline' to={'/'}>политикой конфиденциальности</Link></p>
+                <Button className='w-full h-height rounded-15 text-18' type='primary' htmlType='submit'>Отправить</Button>
+                <p className='text-default-400 text-14'>Нажимая на кнопку, вы соглашаетесь с <Link className='text-blue-400 no-underline' to={'/'}>политикой конфиденциальности</Link></p>
             </div>
         </Form>
     )

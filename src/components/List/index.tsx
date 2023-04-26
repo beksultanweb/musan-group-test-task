@@ -1,52 +1,58 @@
 import { useSelector } from "react-redux"
 import { Table } from "antd"
-import { IRequestsReducer } from "../../store/types"
 import { ColumnsType } from "antd/es/table"
 import { IRequest } from "../../types/types"
+import { selectRequests } from "../../store/RequestStore/selectors"
 
 const columns: ColumnsType<IRequest> = [
     {
         title: '№',
-        dataIndex: 'key',
-        rowScope: 'row'
+        dataIndex: 'id',
+        key: 'id',
+        render: (id, record, index) => {
+            ++index;
+            return index;
+        },
     },
     {
         title: 'Имя',
         dataIndex: 'name',
-        key: 'name'
+        key: 'name',
+        sorter: (a, b) => a.name.localeCompare(b.name)
     },
     {
         title: 'Номер телефона',
         dataIndex: 'tel',
-        key: 'tel'
+        key: 'tel',
     },
     {
         title: 'E-mail',
         dataIndex: 'email',
-        key: 'email'
+        key: 'email',
+        responsive: ['sm']
     },
     {
         title: 'Город',
         dataIndex: 'city',
-        key: 'city'
+        key: 'city',
+        responsive: ['sm']
     },
     {
         title: 'Дата добавления',
         dataIndex: 'date',
-        key: 'date'
+        key: 'date',
+        sorter: (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
     }
 ]
 
 const List = () => {
-    const requests = useSelector((state: IRequestsReducer) => state.requests)
-    console.log(requests)
-
+    const requests = useSelector(selectRequests)
 
     return (
-        <main className="px-[56px]">
+        <div className="sm:px-paddingx">
             <h1>Все заявки</h1>
-            <Table dataSource={requests} columns={columns}/>
-        </main>
+            <Table dataSource={requests} columns={columns} rowKey={'id'} pagination={false}/>
+        </div>
     )
 }
 
